@@ -1,12 +1,16 @@
 import express from 'express';
 import * as bodyParser from 'body-parser';
 import { Color } from './utils/colorConsole';
+import { Logger } from './utils/logger';
 
 export class App {
     public app: express.Application;
     public port: number;
 
+    public logger: Logger;
+
     constructor(controllers: any, port: number) {
+        this.logger = new Logger(this);
         this.app = express();
         this.port = port;
 
@@ -26,7 +30,7 @@ export class App {
 
     public listen() {
         this.app.listen(this.port, () => {
-            console.log( Color.colorConsole('§c[APP]§reset ') + `server listening on the port ${this.port}`);
+            this.logger.info(`Server listening on the port ${this.port}`);
         });
     }
 }
