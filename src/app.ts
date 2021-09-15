@@ -30,7 +30,7 @@ export class App {
 
     public listen() {
         this.app.listen(this.port, () => {
-            this.logger.info(`Server listening on the port ${this.port}`);
+            this.logger.info(`Server listening on port ${this.port}`);
         });
     }
 }
