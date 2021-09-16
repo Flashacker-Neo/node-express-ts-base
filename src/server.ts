@@ -1,11 +1,22 @@
 import { App } from './app';
 import { ExempleController } from './controllers/exemple/exemple.controller';
+import { Logger } from './utils/logger';
 
-const app = new App(
-  [
-    new ExempleController(),
-  ],
-  5000,
-);
+export class Main {
+  private logger: Logger = new Logger(this);
 
-app.listen();
+  constructor(port: number, routes: any[]) {
+    this.start(port, routes);
+  }
+
+  private async start(port: number, routes: any[]) {
+    this.logger.info('Start the server');
+    
+    new App(routes, port).listen();
+  }
+}
+
+const routes: any[] = [
+  new ExempleController(),
+];
+new Main(4000, routes);
