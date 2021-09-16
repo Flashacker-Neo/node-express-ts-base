@@ -1,6 +1,7 @@
 import express from 'express';
 import * as bodyParser from 'body-parser';
 import { Logger } from './utils/logger';
+import { environment } from './environment';
 
 export class App {
     private app: express.Application;
@@ -8,10 +9,10 @@ export class App {
 
     private logger: Logger;
 
-    constructor(controllers: any, port: number) {
+    constructor(controllers: any) {
         this.logger = new Logger(this);
         this.app = express();
-        this.port = port;
+        this.port = environment.server.port || 5000;
 
         this.initializeMiddlewares();
         this.initializeControllers(controllers);
